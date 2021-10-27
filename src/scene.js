@@ -15,12 +15,16 @@ export const InitScene = () => {
   renderer.domElement.classList.add("three");
   document.body.appendChild(renderer.domElement);
 
+  const bgColor = new THREE.Color("rgb(31, 31, 31)");
+
+  scene.background = bgColor;
+
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshBasicMaterial({ color: "white" });
   const cube = new THREE.Mesh(geometry, material);
   scene.add(cube);
 
-  camera.position.z = 5;
+  camera.position.z = 10;
 
   const bottomBorder = -2;
   const topBorder = 2.5;
@@ -36,7 +40,7 @@ export const InitScene = () => {
       ease: "elastic",
     }); //falling
 
-    await gsap.to(cube.scale, { y: 3, duration: 0.3, ease: "elastic" }); //transforming y
+    await gsap.to(cube.scale, { y: 2, duration: 0.3, ease: "elastic" }); //transforming y
 
     gsap.to(cube.position, {
       y: bottomBorder / 2,
@@ -52,7 +56,7 @@ export const InitScene = () => {
     gsap.to(cube.scale, {
       x: 1,
       y: 1,
-      duration: 2,
+      duration: 1,
       ease: "elastic",
       onComplete: callAnimation,
     }); //transforming y
@@ -63,7 +67,7 @@ export const InitScene = () => {
   const animate = function () {
     requestAnimationFrame(animate);
 
-    cube.rotation.y += 0.005;
+    // cube.rotation.y += 0.005;
 
     renderer.render(scene, camera);
   };
