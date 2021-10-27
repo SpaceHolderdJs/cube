@@ -48,7 +48,7 @@ export const InitScene = () => {
       ease: "elastic",
     }); //falling
 
-    await gsap.to(cube.scale, { x: 2, y: 1, duration: 0.5, ease: "elastic" }); // transforming x
+    await gsap.to(cube.scale, { x: 2.5, y: 1, duration: 0.1, ease: "elastic" }); // transforming x
 
     gsap.to(cube.scale, { x: 1, y: 3, duration: 0.5, ease: "elastic" }); //transforming y
     gsap.to(cube.position, { y: topBorder, duration: 4, ease: "elastic" }); // upping x
