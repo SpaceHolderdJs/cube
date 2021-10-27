@@ -24,15 +24,12 @@ export const InitScene = () => {
 
   const bottomBorder = -2;
   const topBorder = 2.5;
-  const speedOfFalling = 0.05;
-
-  const g = 9.8;
 
   cube.position.y = topBorder;
 
-  const timeline = gsap.timeline();
+  const callAnimation = animation;
 
-  window.addEventListener("click", async () => {
+  async function animation() {
     gsap.to(cube.position, {
       y: bottomBorder / 2,
       duration: 4,
@@ -47,25 +44,24 @@ export const InitScene = () => {
       ease: "elastic",
     }); //falling
 
-    await gsap.to(cube.scale, { x: 3, y: 1, duration: 0.5, ease: "elastic" }); // transforming x
+    await gsap.to(cube.scale, { x: 2, y: 1, duration: 0.5, ease: "elastic" }); // transforming x
 
     gsap.to(cube.scale, { x: 1, y: 3, duration: 0.5, ease: "elastic" }); //transforming y
     gsap.to(cube.position, { y: topBorder, duration: 4, ease: "elastic" }); // upping x
 
-    gsap.to(cube.scale, { x: 1, y: 1, duration: 2, ease: "elastic" }); //transforming y
-  });
+    gsap.to(cube.scale, {
+      x: 1,
+      y: 1,
+      duration: 2,
+      ease: "elastic",
+      onComplete: callAnimation,
+    }); //transforming y
+  }
+
+  callAnimation();
 
   const animate = function () {
     requestAnimationFrame(animate);
-
-    // if (cube.position.y - speedOfFalling < bottomBorder) {
-    //   cube.position.y = topBorder;
-    //   gsap.to(cube.scale, { y: 3, duration: 3, ease: "elastic" });
-    // } else {
-    //   cube.position.y -= speedOfFalling;
-    //   //   cube.scale.y = 2.5;
-    //   gsap.set(cube.scale, { x: 3, y: 1 });
-    // }
 
     cube.rotation.y += 0.005;
 
